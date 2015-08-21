@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="libraryApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Library</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="datapicker/bootstrap-datepicker.min.css">
+    <link rel="stylesheet" href="main.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="datapicker/bootstrap-datepicker.min.js"></script>
+    <script src="main.js"></script>
+</head>
+<body ng-controller="libraryController">
+<div id="content">
+    <div class="search-block">
+        <h4>Search:</h4>
+        <input ng-model="query" type="text" placeholder="Книга, человек, категория и т.п."/>
+    </div>
+
+    <article class="new-book">
+        <h4>Add book:</h4>
+        <form ng-submit="addBook()">
+            <input ng-model="newBook.name" type="text" placeholder="Название книги"/>
+            <select ng-model="newBook.category" type="text" placeholder="Категория">
+                <option>Художественная</option>
+                <option>Веб-программирование</option>
+                <option>Дизайн</option>
+                <option>Работа</option>
+                <option>Серверное программирование</option>
+            </select>
+            <button>Save</button>
+        </form>
+    </article>
+
+    <table class="list-books">
+        <caption>Книг не сдано: {{ countExpired }}</caption>
+        <tr>
+            <th>Название</th>
+            <th>Категория</th>
+            <th>У кого</th>
+            <th>Когда взяли</th>
+            <th>Срок сдачи</th>
+        </tr>
+        <tr ng-repeat="book in books | filter:query" ng-class="{expired: book.expired == true}">
+            <td>{{ book.name | limitTo: 30 }}</td>
+            <td>{{ book.category | limitTo: 30 }}</td>
+            <td>{{ book.person | limitTo: 30 }}</td>
+            <td>{{ book.begin }}</td>
+            <td>{{ book.end }}</td>
+            <td><button ng-click="showEdit(book)">Give</button></td>
+            <!--<td><button ng-click="returnBook(book)">Return</button></td>-->
+        </tr>
+    </table>
+</div>
+<div ng-show="editBlockShow" class="footer" class="edit-book">
+    <form>
+        <h4>{{ editBook.name }}</h4>
+        <small>{{ editBook.category }}</small>
+        <input type="text" placeholder="Фамилия" ng-model="editBook.person"/>
+        <div class="input-daterange input-group" id="datepicker">
+            <input type="text" name="start" placeholder="Начальная дата" ng-model="editBook.begin"/>
+            <span>to</span>
+            <input type="text" name="end" placeholder="Конечная дата" ng-model="editBook.end"/>
+        </div>
+        <button ng-click="saveEdit()">Save</button>
+        <button ng-click="cancelEdit()">Cancel</button>
+    </form>
+</div>
+    <script>
+        $('.input-daterange').datepicker({
+            format: "dd MM, yyyy",
+            weekStart: 1,
+            todayBtn: "linked",
+            todayHighlight: true,
+            autoclose: true
+        }).on('changeDate', function(){
+            $(this).change();
+        });
+    </script>
+</body>
+</html>

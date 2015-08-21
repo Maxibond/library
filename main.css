@@ -1,0 +1,104 @@
+html, body{
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+h1,h2,h3,h4,h5,h6{
+    padding: 0;
+    margin: 0;
+}
+
+button{
+    background-color: #6D8CB0;
+    color: #FFF;
+    width: 100px;
+}
+button:hover{
+    background-color: #4A6B8E;
+}
+
+.search-block{
+    border-top: 1px solid gray;
+    border-bottom: 1px solid gray;
+    padding: 7px;
+    margin: 10px auto 45px;
+}
+
+.search-block input{
+    width: 25%;
+}
+
+.new-book{
+    padding-left: 15px;
+    margin-bottom: 7px;
+}
+
+.list-books{
+    margin: 0 auto;
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.list-books td, th{
+    border: 1px solid gray;
+    padding: 3px 5px;
+}
+
+.list-books th{
+    background-color: #cccccc;
+}
+
+.list-books tr:nth-child(2n){
+    background-color: #eeeeee;
+}
+
+.list-books td:last-child {
+    border: none;
+    background-color: white;
+}
+
+.expired td:not(:last-child){
+    background-color: rgba(240, 185, 172, 0.8);
+}
+
+caption{
+    margin-left: 20px;
+    padding: 2px;
+    display: inline;
+    color: whitesmoke;
+    background-color: crimson;
+}
+
+#content{
+    min-height: 100%;
+    margin-bottom: 65px;
+    box-sizing: border-box;
+}
+* html #content {
+    height: 100%;
+}
+
+.footer{
+    position: fixed;
+    height: 50px;
+    background-color: white;
+    bottom: 0;
+    border: 2px solid gray;
+    padding: 10px;
+    width: 100%;
+    background-color: #cccccc;
+}
+
+.input-group{
+    display: inline-block;
+}
+
+.footer h4{
+    display: inline;
+}
+
+.footer small{
+    color: #525252;
+}
